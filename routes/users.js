@@ -6,6 +6,7 @@ const { usersGet,
     usersDelete,
     usersPost,
     usersPatch } = require('../controllers/users');
+const { isRoleValid } = require('../helpers/db-validators');
 const { validateFields } = require('../middlewares/validate-fields');
 
 const router = Router();
@@ -18,9 +19,10 @@ router.put('/:id', usersPut)
 router.post('/',
     [
         check('name', 'Name is required').not().isEmpty(),
-        check('password', 'Password is required and must contain minimum 6 characters.').isLength({min: 6}),
+        check('password', 'Password is required and must contain minimum 6 characters.').isLength({ min: 6 }),
         check('email', 'Email not valid').isEmail(),
-        check('role', 'Role not valid').isIn(['ADMIN_ROLE', 'USER_ROLE']),
+        /*         check('role', 'Role not valid').isIn(['ADMIN_ROLE', 'USER_ROLE']),*/
+        check('role').custom(isRoleValid),
         jsonParser,
         validateFields
     ]
