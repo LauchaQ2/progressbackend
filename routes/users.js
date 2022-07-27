@@ -6,8 +6,15 @@ const { usersGet,
     usersDelete,
     usersPost,
     usersPatch } = require('../controllers/users');
+
 const { isRoleValid, isEmailExist, userIdExist } = require('../helpers/db-validators');
-const { validateFields } = require('../middlewares/validate-fields');
+
+const {
+    validateFields,
+    validateJWT,
+    isAdminRole,
+    haveRole
+} = require('../middlewares')
 
 const router = Router();
 const jsonParser = bodyParser.json();
@@ -35,6 +42,9 @@ router.post('/',
     , usersPost)
 //DELETE
 router.delete('/:id',
+    validateJWT,
+    // isAdminRole,
+    haveRole('USER_ROLE', 'ADMIN_ROLE', 'SALE_ROLE'),
     check('id', "ID not valid").isMongoId(),
     check('id').custom(userIdExist),
     validateFields
