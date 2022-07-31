@@ -11,30 +11,41 @@ const isRoleValid = async (role = '') => {
 }
 
 const isEmailExist = async (email = '') => {
-    const emailExist = await User.findOne({email})
-    if (emailExist){
+    const emailExist = await User.findOne({ email })
+    if (emailExist) {
         throw new Error(`Email ${email} is already registered.`)
     }
 }
 
 const userIdExist = async (id) => {
     const idExist = await User.findById(id)
-    if (!idExist){
+    if (!idExist) {
         throw new Error(`Id ${id} isn't registered on DB.`)
     }
 }
 
 const categoryIdExist = async (id) => {
     const categoryExist = await Category.findById(id)
-    if (!categoryExist){
+    if (!categoryExist) {
         throw new Error(`Id ${id} isn't registered on DB.`)
     }
 }
 const productIdExist = async (id) => {
     const productExist = await Product.findById(id)
-    if (!productExist){
+    if (!productExist) {
         throw new Error(`Id ${id} isn't registered on DB.`)
     }
+}
+
+const allowedCollections = (collection = '', collections = []) => {
+
+    const collectionInclude = collections.includes(collection)
+    if (!collectionInclude){
+        throw new Error(`Collection ${collection} isn't allowed.`)
+    }
+
+    return true;
+
 }
 
 
@@ -44,5 +55,6 @@ module.exports = {
     isEmailExist,
     userIdExist,
     categoryIdExist,
-    productIdExist
+    productIdExist,
+    allowedCollections
 }
