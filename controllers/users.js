@@ -12,6 +12,7 @@ const usersGet = async (req = request, res = response) => {
         User.find({ state: true })
             .skip(Number(from))
             .limit(Number(limit))
+            
     ])
 
     res.json({
