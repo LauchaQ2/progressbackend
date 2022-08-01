@@ -36,11 +36,13 @@ class Server {
         this.app.use(cors())
         this.app.use(express.json())
         this.app.use(express.static('public'))
-        this.app.use(function(req, res, next) {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Cache-Control, Key, Access-Control-Allow-Origin");
+        this.app.use(function (req, res, next) {
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+            res.setHeader('Access-Control-Allow-Credentials', true);
             next();
-        });
+            });
         this.app.use(fileUpload({
             useTempFiles : true,
             tempFileDir : '/tmp/',
