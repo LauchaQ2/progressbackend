@@ -14,9 +14,9 @@ const paymentMercadoPago = async(req, res = response) => {
     let preference = {
         items: [],
         back_urls: {
-            success: "http://localhost:3000/",
-            failure: "http://localhost:3000/",
-            pending: "http://localhost:3000/",
+            success: "https://app-test-node.netlify.app/",
+            failure: "https://app-test-node.netlify.app/",
+            pending: "https://app-test-node.netlify.app/",
         },
         auto_return: "approved",
     };
