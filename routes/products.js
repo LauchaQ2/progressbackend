@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { createProduct, getProducts, getProduct, updateProduct, deleteProduct } = require('../controllers/products');
+const { createProduct, getProducts, getProduct, updateProduct, deleteProduct, paymentMercadoPago } = require('../controllers/products');
 const { productIdExist, categoryIdExist } = require('../helpers/db-validators');
 const { validateJWT, isAdminRole } = require('../middlewares');
 
@@ -28,6 +28,10 @@ router.post('/', [
     check('category').custom(categoryIdExist),
     validateFields
 ], createProduct)
+
+router.post('/payment',[validateFields], paymentMercadoPago,(req, res) => {
+    res.json('payment')
+})
 
 router.put('/:id',[
     validateJWT,
