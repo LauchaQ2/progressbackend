@@ -6,7 +6,7 @@ const ShoppingSchema = Schema({
         ref: 'User',
     },
     products: [{
-        id: {
+        _id: {
             type: Schema.Types.ObjectId,
             ref: 'Product',
         },
