@@ -3,8 +3,7 @@ const {Shopping} = require("../models");
 
 
 const postShopping = async(req, res = response) =>{
-    const products = req.body.products;
-    const customer = req.body.customer;
+    const {products, customer} = req.body;
 
 
     const data = [];
