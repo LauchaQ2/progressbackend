@@ -6,17 +6,7 @@ const postShopping = async(req, res = response) =>{
     const {products, customer} = req.body;
 
 
-    const data = [];
-
-    products.map(product =>{
-        data.push({
-            name: product.name,
-            _id: product.id,
-            quantity: product.quantity
-        })
-    })
-
-    const shopping = new Shopping({customer: customer, products: data})
+    const shopping = new Shopping({customer: customer, products: products})
     console.log(shopping)
     await shopping.save();
 

@@ -1,13 +1,16 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const ShoppingSchema = Schema({
-    customer:{
-        type: String,
-        required: true,
-        unique: false
-    },
+    customer: [
+        {
+            id: {
+                type: String,
+                required: true,
+            }
+        },
+    ],
     products: [{
-        _id: {
+        id: {
             type: Schema.Types.ObjectId,
             ref: 'Product',
             required: true
@@ -16,7 +19,7 @@ const ShoppingSchema = Schema({
             type: Number,
             default: 1
         },
-        name:{
+        name: {
             type: String
         }
     }]

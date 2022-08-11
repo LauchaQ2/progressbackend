@@ -6,9 +6,7 @@ const { validateFields } = require('../middlewares/validate-fields');
 
 const router = Router();
 
-router.post('/', [validateFields], postShopping, (req, res)=>{
-    res.json('shopping')
-})
+router.post('/', [validateFields], postShopping)
 
 
 module.exports = router;
