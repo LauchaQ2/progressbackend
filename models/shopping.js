@@ -2,8 +2,8 @@ const {Schema, model} = require('mongoose');
 
 const ShoppingSchema = Schema({
     customer:{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
+        required: true
     },
     products: [{
         _id: {
