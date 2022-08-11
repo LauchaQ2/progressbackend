@@ -3,7 +3,8 @@ const {Schema, model} = require('mongoose');
 const ShoppingSchema = Schema({
     customer:{
         type: String,
-        required: true
+        required: true,
+        unique: false
     },
     products: [{
         _id: {
