@@ -3,10 +3,13 @@ const {Shopping} = require("../models");
 
 
 const postShopping = async(req, res = response) =>{
-    const {products} = req.body;
+    const products = req.body;
 
-
-    const shopping = new Shopping({customer: req.user._id, products: products})
+    const data ={
+        products,
+        customer: req.user._id
+    }
+    const shopping = new Shopping(data)
     console.log(shopping)
     await shopping.save();
 
