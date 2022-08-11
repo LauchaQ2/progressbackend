@@ -15,7 +15,11 @@ const ShoppingSchema = Schema({
             type: String
         }
     }],
-    customer: { type: Schema.Types.ObjectId }
+    customer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 })
 
 module.exports = model('Shopping', ShoppingSchema)
