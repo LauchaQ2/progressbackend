@@ -19,6 +19,7 @@ const postShopping = async(req, res = response) =>{
     })
 
     const shopping = new Shopping({customer: customer, products: data})
+    console.log(shopping)
     await shopping.save();
 
     res.status(201).json(shopping)
