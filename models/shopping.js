@@ -1,7 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
 
 const ShoppingSchema = Schema({
-    products: [{
+    buyer: [{products: [{
         id: {
             type: Schema.Types.ObjectId,
             ref: 'Product',
@@ -19,7 +19,7 @@ const ShoppingSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    }
+    }}]
 })
 
 module.exports = model('Shopping', ShoppingSchema)
