@@ -13,8 +13,9 @@ const postShopping = async(req, res = response) =>{
 
     products.map(product =>{
         data.push({
-            ...product,
+            name: product.name,
             productId: product.id,
+            quantity: product.quantity
         })
     })
 
