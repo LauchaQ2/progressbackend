@@ -2,7 +2,7 @@ const { Schema, model, Types } = require('mongoose');
 
 const ShoppingSchema = Schema({
     products: [{
-        id: {
+        _id: {
             type: Schema.Types.ObjectId,
             ref: 'Product',
             required: true
@@ -15,10 +15,9 @@ const ShoppingSchema = Schema({
             type: String
         }
     }],
-    _id: {
+    customer:{
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true
     }
 })
 
