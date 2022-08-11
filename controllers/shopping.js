@@ -9,7 +9,16 @@ const postShopping = async(req, res = response) =>{
     console.log(products)
     console.log(customer)
 
-    const shopping = new Shopping({customer: customer, products: products})
+    const data = [];
+
+    products.map(product =>{
+        data.push({
+            ...product,
+            productId: product.id,
+        })
+    })
+
+    const shopping = new Shopping({customer: customer, products: data})
     await shopping.save();
 
     res.status(201).json(shopping)
