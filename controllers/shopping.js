@@ -3,7 +3,7 @@ const {Shopping} = require("../models");
 
 
 const postShopping = async(req, res = response) =>{
-    const products = req.body;
+    const {products} = req.body;
 
     const data ={
         products,
