@@ -1,6 +1,23 @@
 const { response } = require("express");
 const {Shopping} = require("../models");
 
+const getShoppingByCustomer = async (req, res = response) => {
+
+    const {id} = req.params;
+    console.log(id)
+
+    const [total, shoppings] = await Promise.all([
+        Shopping.countDocuments({ customer: id }),
+        Shopping.find({ customer: id})
+            .populate('customer', 'name')
+    ])
+
+    res.json({
+        total,
+        shoppings
+    })
+
+}
 
 const postShopping = async(req, res = response) =>{
     const {...body} = req.body;
@@ -18,5 +35,6 @@ const postShopping = async(req, res = response) =>{
 
 }
 module.exports = {
-    postShopping
+    postShopping,
+    getShoppingByCustomer
 }

@@ -37,6 +37,7 @@ const productIdExist = async (id) => {
     }
 }
 
+
 const allowedCollections = (collection = '', collections = []) => {
 
     const collectionInclude = collections.includes(collection)
