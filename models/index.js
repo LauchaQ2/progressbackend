@@ -4,6 +4,8 @@ const Server = require('./server')
 const User = require('./user')
 const Product = require('./product')
 const Shopping = require('./shopping')
+const Client = require('./client')
+
 
 module.exports = {
     Category,
@@ -11,5 +13,6 @@ module.exports = {
     Server,
     User,
     Product,
-    Shopping
+    Shopping,
+    Client
 }
