@@ -51,7 +51,7 @@ const ClientSchema = Schema({
         required: [true, 'Domicilio legal is required']
     },
     sedeDeExplotacion: {
-        type: String,
+        type: Object,
         required: [true, 'Sede de Exp is required']
     },
     agencia: {
