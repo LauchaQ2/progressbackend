@@ -4,10 +4,10 @@ import config from '../config.js';
 
 
 const dbsettings = {
-    user: config.dbUser,
-    password: config.dbPassword,
-    server: config.dbServer,
-    database: config.dbDatabase,
+    user: 'lautaro.quevedo',
+    password: 'Laucha2012!',
+    server: '192.168.0.177',
+    database: 'progressaluminio',
     port: 1433,
     encrypt: false,
     options:{
