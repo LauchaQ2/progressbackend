@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.js --babel-node",
+    "build": "babel src -d dist"
   },
   "keywords": [],
   "author": "",
@@ -17,13 +19,26 @@
     "cloudinary": "^1.30.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
     "express-validator": "^6.14.2",
+    "fs": "^0.0.1-security",
     "google-auth-library": "^8.1.1",
+    "googleapis": "^128.0.0",
     "jsonwebtoken": "^8.5.1",
     "mercadopago": "^1.5.14",
     "mongoose": "^6.4.4",
+    "morgan": "^1.10.0",
+    "mssql": "^10.0.1",
+    "multer": "^1.4.5-lts.1",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/node": "^7.22.19",
+    "@babel/plugin-transform-runtime": "^7.23.3",
+    "@babel/preset-env": "^7.23.2",
+    "nodemon": "^3.0.1"
   }
 }

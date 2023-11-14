@@ -1,0 +1,10 @@
+@api = http://localhost:3000/productos_colores
+GET {{api}}
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "producto_id": 9,
+    "color_id": 7
+}

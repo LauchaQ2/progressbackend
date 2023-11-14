@@ -1,0 +1,10 @@
+@api = http://localhost:3000/productos
+GET {{api}}
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "nombre": "mesita8",
+    "precio": 2000
+}

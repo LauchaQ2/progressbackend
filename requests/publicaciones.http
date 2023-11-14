@@ -1,0 +1,10 @@
+@api = http://localhost:3000/publicaciones
+GET {{api}}
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "titulo": "se viene!!!",
+    "descripcion": "de prueba"
+}

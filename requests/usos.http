@@ -1,0 +1,9 @@
+@api = http://localhost:3000/usos
+GET {{api}}
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "nombre": "Interior y Exterior"
+}

@@ -1,0 +1,9 @@
+@api = http://localhost:3000/colores
+GET {{api}}
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "nombre": "Blanco y Nórdico"
+}
