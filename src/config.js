@@ -4,8 +4,8 @@ config();
 
 export default {
     port: process.env.PORT || 3000,
-    dbUser: process.env.DB_USER || '',
-    dbPassword: process.env.DB_PASSWORD || '',
+    dbUser: 'lautaro.quevedo' || '',
+    dbPassword: 'Laucha2012!' || '',
     dbServer: '192.168.0.177' || '',
-    dbDatabase: process.env.DB_DATABASE || ''
+    dbDatabase: 'progressaluminio' || ''
 }
