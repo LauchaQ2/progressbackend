@@ -6,12 +6,11 @@ export async function pruebaConexion() {
         if (pool) {
             const result = await pool.request().query('SELECT TOP 2 * FROM productos');
             console.log('Conexión exitosa:', result.recordset);
-        } else {
-            console.error('Error al obtener la conexión.');
         }
     } catch (error) {
         console.error('Error al ejecutar la prueba de conexión:', error);
-    }
+        console.error('Error details:', error.details);
+        }
 }
 
 
