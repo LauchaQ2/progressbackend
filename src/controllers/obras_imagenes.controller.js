@@ -1,26 +1,22 @@
-import { getConnection, sql, queries } from "../database/index.js"
+const { getConnection, sql, queries } = require("../database/index.js");
 
-
-export const getObras_Imagenes = async (req, res) => {
-
+const getObras_Imagenes = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(queries.getAllObras_Imagenes)
-        console.log(result)
-        res.json(result.recordset)
+        const result = await pool.request().query(queries.getAllObras_Imagenes);
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
-
-export const createNewObra_Imagenes = async (req, res) => {
-
-    const { image_path } = req.body
+const createNewObra_Imagenes = async (req, res) => {
+    const { image_path } = req.body;
 
     if (image_path == null) {
-        return res.status(404).json({ msg: 'Bad Request. Fill all fields' })
+        return res.status(404).json({ msg: 'Bad Request. Fill all fields' });
     }
 
     try {
@@ -35,22 +31,24 @@ export const createNewObra_Imagenes = async (req, res) => {
         res.json({ id: insertedId, msg: 'New product created' });
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
-}
+};
 
-export const DeleteObraById = async (req, res) => {
-    const { id } = req.params
+const DeleteObraById = async (req, res) => {
+    const { id } = req.params;
 
     try {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', id)
-            .query('DELETE FROM obras_imagenes where id = @id')
-        console.log(result)
-        res.json(result.recordset)
+            .query('DELETE FROM obras_imagenes where id = @id');
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
+
+module.exports = { getObras_Imagenes, createNewObra_Imagenes, DeleteObraById };

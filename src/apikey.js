@@ -1,4 +1,4 @@
-export const apikeys = {
+const apikeys = {
     "type": "service_account",
     "project_id": "progressaluminio",
     "private_key_id": "3ff13191a1479ed3cc511ba8c79247e463efca6c",
@@ -11,3 +11,5 @@ export const apikeys = {
     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/progressaluminio%40progressaluminio.iam.gserviceaccount.com",
     "universe_domain": "googleapis.com"
   }
+
+  module.exports = { apikeys };

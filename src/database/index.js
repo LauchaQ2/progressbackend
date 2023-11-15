@@ -1,2 +1,7 @@
-export * from './connection.js'
-export {queries} from './queries.js'
+const connection = require('./connection.js');
+const { queries } = require('./queries.js');
+
+module.exports = {
+  ...connection,
+  queries
+};

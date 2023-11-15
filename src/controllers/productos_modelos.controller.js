@@ -1,58 +1,54 @@
-import { getConnection, sql, queries } from "../database/index.js"
+const { getConnection, sql, queries } = require("../database/index.js");
 
-
-export const getProductos_Modelos = async (req, res) => {
-
+const getProductos_Modelos = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(queries.getAllProductos_Modelos)
-        console.log(result)
-        res.json(result.recordset)
+        const result = await pool.request().query(queries.getAllProductos_Modelos);
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
-export const getProductos_ModelosById = async (req, res) => {
-    const { id } = req.params
-
-    try {
-        const pool = await getConnection();
-        const result = await pool.request()
-            .input('id', id)
-            .query('SELECT * FROM productos_modelos as pm inner join modelos as m on m.id = pm.modelo_id where producto_id = @id')
-        console.log(result)
-        res.json(result.recordset)
-    } catch (error) {
-        res.status(500);
-        res.send(error.message)
-    }
-};
-
-export const DeleteProductos_ModelosById = async (req, res) => {
-    const { id } = req.params
+const getProductos_ModelosById = async (req, res) => {
+    const { id } = req.params;
 
     try {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', id)
-            .query('DELETE FROM productos_modelos where producto_id = @id')
-        console.log(result)
-        res.json(result.recordset)
+            .query('SELECT * FROM productos_modelos as pm inner join modelos as m on m.id = pm.modelo_id where producto_id = @id');
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
+const DeleteProductos_ModelosById = async (req, res) => {
+    const { id } = req.params;
 
-export const createNewProduct_Modelo = async (req, res) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('id', id)
+            .query('DELETE FROM productos_modelos where producto_id = @id');
+        console.log(result);
+        res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
 
-    const { producto_id, modelo_id } = req.body
+const createNewProduct_Modelo = async (req, res) => {
+    const { producto_id, modelo_id } = req.body;
 
     if (producto_id == null || modelo_id == null) {
-        return res.status(404).json({ msg: 'Bad Request. Fill all fields' })
+        return res.status(404).json({ msg: 'Bad Request. Fill all fields' });
     }
 
     try {
@@ -68,9 +64,8 @@ export const createNewProduct_Modelo = async (req, res) => {
         res.json({ id: insertedId, msg: 'New product created' });
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
+};
 
-
-
-}
+module.exports = { getProductos_Modelos, getProductos_ModelosById, DeleteProductos_ModelosById, createNewProduct_Modelo };

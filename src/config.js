@@ -1,11 +1,9 @@
-import { config } from "dotenv"
+require("dotenv").config();
 
-config();
-
-export default {
-    port: process.env.PORT || 3000,
-    dbUser: 'lautaro.quevedo' || '',
-    dbPassword: 'Laucha2012!' || '',
-    dbServer: '192.168.0.177' || '',
-    dbDatabase: 'progressaluminio' || ''
-}
+module.exports = {
+  port: process.env.PORT || 3000,
+  dbUser: process.env.DB_USER || 'lautaro.quevedo',
+  dbPassword: process.env.DB_PASSWORD || 'Laucha2012!',
+  dbServer: process.env.DB_SERVER || '192.168.0.177',
+  dbDatabase: process.env.DB_DATABASE || 'progressaluminio'
+};

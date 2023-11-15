@@ -1,17 +1,20 @@
-import { Router } from "express";
-import { createNewColor, getColores } from "../controllers/colores.controllers.js";
-// import { createNewProduct } from "../controllers/productos.controller.js";
+const express = require("express");
+const {
+  createNewColor,
+  getColores
+} = require("../controllers/colores.controllers.js");
+// const { createNewProduct } = require("../controllers/productos.controller.js");
 
-const router = Router()
+const router = express.Router();
 
-router.get('/colores', getColores)
+router.get('/colores', getColores);
 
-router.post('/colores', createNewColor)
+router.post('/colores', createNewColor);
 
-router.get('/productos',)
+router.get('/productos',);
 
-router.delete('/productos',)
+router.delete('/productos',);
 
-router.put('/productos',)
+router.put('/productos',);
 
-export default router;
+module.exports = router;

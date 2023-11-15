@@ -1,5 +1,5 @@
-import app from "./app.js"
+const app = require('./app.js');
 
-app.listen(app.get('port'))
+app.listen(app.get('port'));
 
-console.log('server port:', app.get('port'))
+console.log('Server port:', app.get('port'));

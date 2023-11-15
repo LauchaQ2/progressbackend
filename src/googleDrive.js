@@ -1,32 +1,39 @@
-import { google } from 'googleapis'; // Asegúrate de importar googleapis según corresponda
-import fs from 'fs';
-import { apikeys } from './apikey.js';
-import path from 'path';
+const { google } = require('googleapis');
+const fs = require('fs');
+const { apikeys } = require('./apikey.js');
+const path = require('path');
 
-const SCOPE = ["https://www.googleapis.com/auth/drive"]
+const SCOPE = ["https://www.googleapis.com/auth/drive"];
 
-export async function authorize() {
+function authorize() {
   const jwtClient = new google.auth.JWT(
     apikeys.client_email,
     null,
     apikeys.private_key,
     SCOPE
-  )
-  await jwtClient.authorize()
-  return jwtClient;
+  );
+
+  return new Promise((resolve, reject) => {
+    jwtClient.authorize((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(jwtClient);
+    });
+  });
 }
 
-export async function uploadFile(authClient, originalname) {
+function uploadFile(authClient, originalname) {
   const drive = google.drive({ version: 'v3', auth: authClient });
 
   const fileMetaData = {
-    name: originalname, // Nombre del archivo se mantendrá igual
+    name: originalname,
     parents: ["16vR9enaI1p_4apNu3TG8tAbE7cUlu4c4"]
   };
 
   let mimeType;
 
-  // Lógica para determinar el tipo MIME según la extensión del archivo
   if (originalname.endsWith('.jpg') || originalname.endsWith('.jpeg')) {
     mimeType = 'image/jpeg';
   } else if (originalname.endsWith('.png')) {
@@ -34,11 +41,10 @@ export async function uploadFile(authClient, originalname) {
   } else if (originalname.endsWith('.gif')) {
     mimeType = 'image/gif';
   } else {
-    // Establece un tipo MIME predeterminado si la extensión no coincide con ninguno de los formatos admitidos
     mimeType = 'application/octet-stream';
   }
 
-  return new Promise((resolve, rejected) => {
+  return new Promise((resolve, reject) => {
     drive.files.create({
       resource: fileMetaData,
       media: {
@@ -48,9 +54,12 @@ export async function uploadFile(authClient, originalname) {
       fields: 'id'
     }, (err, file) => {
       if (err) {
-        return rejected(err);
+        reject(err);
+        return;
       }
       resolve(file.data.id);
     });
   });
 }
+
+module.exports = { authorize, uploadFile };

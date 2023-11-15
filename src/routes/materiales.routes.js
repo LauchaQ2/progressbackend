@@ -1,16 +1,19 @@
-import { Router } from "express";
-import { createNewMaterial, getMateriales } from "../controllers/materiales.controller.js";
+const express = require("express");
+const {
+  createNewMaterial,
+  getMateriales
+} = require("../controllers/materiales.controller.js");
 
-const router = Router()
+const router = express.Router();
 
-router.get('/materiales', getMateriales)
+router.get('/materiales', getMateriales);
 
-router.post('/materiales', createNewMaterial)
+router.post('/materiales', createNewMaterial);
 
-router.get('/productos',)
+router.get('/productos',);
 
-router.delete('/productos',)
+router.delete('/productos',);
 
-router.put('/productos',)
+router.put('/productos',);
 
-export default router;
+module.exports = router;

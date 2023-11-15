@@ -1,26 +1,22 @@
-import { getConnection, sql, queries } from "../database/index.js"
+const { getConnection, sql, queries } = require("../database/index.js");
 
-
-export const getDecoraciones_Imagenes = async (req, res) => {
-
+const getDecoraciones_Imagenes = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(queries.getAllDecoraciones_Imagenes)
-        console.log(result)
-        res.json(result.recordset)
+        const result = await pool.request().query(queries.getAllDecoraciones_Imagenes);
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
-
-export const createNewDecoracion_Imagenes = async (req, res) => {
-
-    const { image_path } = req.body
+const createNewDecoracion_Imagenes = async (req, res) => {
+    const { image_path } = req.body;
 
     if (image_path == null) {
-        return res.status(404).json({ msg: 'Bad Request. Fill all fields' })
+        return res.status(404).json({ msg: 'Bad Request. Fill all fields' });
     }
 
     try {
@@ -35,22 +31,24 @@ export const createNewDecoracion_Imagenes = async (req, res) => {
         res.json({ id: insertedId, msg: 'New product created' });
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
-}
+};
 
-export const DeleteDecoracionById = async (req, res) => {
-    const { id } = req.params
+const DeleteDecoracionById = async (req, res) => {
+    const { id } = req.params;
 
     try {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', id)
-            .query('DELETE FROM decoraciones_imagenes where id = @id')
-        console.log(result)
-        res.json(result.recordset)
+            .query('DELETE FROM decoraciones_imagenes where id = @id');
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
+
+module.exports = { getDecoraciones_Imagenes, createNewDecoracion_Imagenes, DeleteDecoracionById };

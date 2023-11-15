@@ -1,42 +1,38 @@
-import { getConnection, sql, queries } from "../database/index.js"
+const { getConnection, sql, queries } = require("../database/index.js");
 
-
-export const getProductos = async (req, res) => {
-
+const getProductos = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(queries.getAllProductos)
-        console.log(result)
-        res.json(result.recordset)
+        const result = await pool.request().query(queries.getAllProductos);
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
-export const DeleteProductosById = async (req, res) => {
-    const { id } = req.params
+const DeleteProductosById = async (req, res) => {
+    const { id } = req.params;
 
     try {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', id)
-            .query('DELETE FROM productos where id = @id')
-        console.log(result)
-        res.json(result.recordset)
+            .query('DELETE FROM productos where id = @id');
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
-
-export const createNewProduct = async (req, res) => {
-
-    const { nombre, precio } = req.body
+const createNewProduct = async (req, res) => {
+    const { nombre, precio } = req.body;
 
     if (nombre == null || precio == null) {
-        return res.status(404).json({ msg: 'Bad Request. Fill all fields' })
+        return res.status(404).json({ msg: 'Bad Request. Fill all fields' });
     }
 
     try {
@@ -52,22 +48,24 @@ export const createNewProduct = async (req, res) => {
         res.json({ id: insertedId, msg: 'New product created' });
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
-}
+};
 
-export const getProductosById = async (req, res) => {
-    const { id } = req.params
+const getProductosById = async (req, res) => {
+    const { id } = req.params;
 
     try {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', id)
-            .query('SELECT * FROM productos where id = @id')
-        console.log(result)
-        res.json(result.recordset)
+            .query('SELECT * FROM productos where id = @id');
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
+
+module.exports = { getProductos, DeleteProductosById, createNewProduct, getProductosById };

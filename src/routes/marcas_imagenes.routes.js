@@ -1,16 +1,18 @@
-import { Router } from "express";
-import { DeleteMarcaById, createNewMarca_Imagenes, getMarcas_Imagenes } from "../controllers/marcas_imagenes.controller.js";
+const express = require("express");
+const {
+  DeleteMarcaById,
+  createNewMarca_Imagenes,
+  getMarcas_Imagenes
+} = require("../controllers/marcas_imagenes.controller.js");
 
-const router = Router()
+const router = express.Router();
 
-router.get('/marcas_imagenes', getMarcas_Imagenes)
+router.get('/marcas_imagenes', getMarcas_Imagenes);
 
-router.post('/marcas_imagenes', createNewMarca_Imagenes)
+router.post('/marcas_imagenes', createNewMarca_Imagenes);
 
-// router.get('/productos',)
+router.delete('/marcas_imagenes/:id', DeleteMarcaById);
 
-router.delete('/marcas_imagenes/:id', DeleteMarcaById)
+router.put('/productos',);
 
-router.put('/productos',)
-
-export default router;
+module.exports = router;

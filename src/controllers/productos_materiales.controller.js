@@ -1,59 +1,54 @@
-import { getConnection, sql, queries } from "../database/index.js"
+const { getConnection, sql, queries } = require("../database/index.js");
 
-
-export const getProductos_Material = async (req, res) => {
-
+const getProductos_Material = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(queries.getAllProductos_Materiales)
-        console.log(result)
-        res.json(result.recordset)
+        const result = await pool.request().query(queries.getAllProductos_Materiales);
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
-export const getProductos_MaterialById = async (req, res) => {
-    const { id } = req.params
-
-    try {
-        const pool = await getConnection();
-        const result = await pool.request()
-            .input('id', id)
-            .query('SELECT * FROM productos_materiales as pm inner join materiales as m on m.id = pm.material_id where producto_id = @id')
-        console.log(result)
-        res.json(result.recordset)
-    } catch (error) {
-        res.status(500);
-        res.send(error.message)
-    }
-};
-
-export const DeleteProductos_MaterialesById = async (req, res) => {
-    const { id } = req.params
+const getProductos_MaterialById = async (req, res) => {
+    const { id } = req.params;
 
     try {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', id)
-            .query('DELETE FROM productos_materiales where producto_id = @id')
-        console.log(result)
-        res.json(result.recordset)
+            .query('SELECT * FROM productos_materiales as pm inner join materiales as m on m.id = pm.material_id where producto_id = @id');
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
+const DeleteProductos_MaterialesById = async (req, res) => {
+    const { id } = req.params;
 
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('id', id)
+            .query('DELETE FROM productos_materiales where producto_id = @id');
+        console.log(result);
+        res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
 
-export const createNewProduct_Material = async (req, res) => {
-
-    const { producto_id, material_id } = req.body
+const createNewProduct_Material = async (req, res) => {
+    const { producto_id, material_id } = req.body;
 
     if (producto_id == null || material_id == null) {
-        return res.status(404).json({ msg: 'Bad Request. Fill all fields' })
+        return res.status(404).json({ msg: 'Bad Request. Fill all fields' });
     }
 
     try {
@@ -69,9 +64,8 @@ export const createNewProduct_Material = async (req, res) => {
         res.json({ id: insertedId, msg: 'New product created' });
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
+};
 
-
-
-}
+module.exports = { getProductos_Material, getProductos_MaterialById, DeleteProductos_MaterialesById, createNewProduct_Material };

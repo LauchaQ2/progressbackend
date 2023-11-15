@@ -1,7 +1,6 @@
-import sql from 'mssql'
-import { pruebaConexion } from "../database/test.js";
-import config from '../config.js';
-
+const sql = require('mssql');
+const { pruebaConexion } = require("../database/test.js");
+const config = require('../config.js');
 
 const dbsettings = {
     user: 'lautaro.quevedo',
@@ -10,24 +9,21 @@ const dbsettings = {
     database: 'progressaluminio',
     port: 1433,
     encrypt: false,
-    options:{
+    options: {
         trustServerCertificate: true,
         encrypt: false
     }
-}
+};
 
-
-export async function getConnection(){
-
+async function getConnection() {
     try {
-        const pool = await sql.connect(dbsettings)
-        return pool
+        const pool = await sql.connect(dbsettings);
+        return pool;
+        console.log("conexion ok")
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-   
 }
 
-pruebaConexion()
 
-export {sql};
+module.exports = { sql, getConnection };

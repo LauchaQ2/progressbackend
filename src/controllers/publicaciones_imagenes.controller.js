@@ -1,26 +1,22 @@
-import { getConnection, sql, queries } from "../database/index.js"
+const { getConnection, sql, queries } = require("../database/index.js");
 
-
-export const getPublicaciones_Imagenes = async (req, res) => {
-
+const getPublicaciones_Imagenes = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(queries.getAllPublicaciones_Imagenes)
-        console.log(result)
-        res.json(result.recordset)
+        const result = await pool.request().query(queries.getAllPublicaciones_Imagenes);
+        console.log(result);
+        res.json(result.recordset);
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
 };
 
-
-export const createNewPublicaciones_Imagenes = async (req, res) => {
-
-    const { publicacion_id, image_path } = req.body
+const createNewPublicaciones_Imagenes = async (req, res) => {
+    const { publicacion_id, image_path } = req.body;
 
     if (publicacion_id == null || image_path == null) {
-        return res.status(404).json({ msg: 'Bad Request. Fill all fields' })
+        return res.status(404).json({ msg: 'Bad Request. Fill all fields' });
     }
 
     try {
@@ -36,9 +32,8 @@ export const createNewPublicaciones_Imagenes = async (req, res) => {
         res.json({ id: insertedId, msg: 'New product created' });
     } catch (error) {
         res.status(500);
-        res.send(error.message)
+        res.send(error.message);
     }
+};
 
-
-
-}
+module.exports = { getPublicaciones_Imagenes, createNewPublicaciones_Imagenes };

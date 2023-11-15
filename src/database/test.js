@@ -1,16 +1,19 @@
-import { getConnection } from "./connection.js";
+const { getConnection } = require("./connection.js");
 
-export async function pruebaConexion() {
-    try {
-        const pool = await getConnection();
-        if (pool) {
-            const result = await pool.request().query('SELECT TOP 2 * FROM productos');
-            console.log('Conexión exitosa:', result.recordset);
-        }
-    } catch (error) {
-        console.error('Error al ejecutar la prueba de conexión:', error);
-        console.error('Error details:', error.details);
-        }
+async function pruebaConexion() {
+  try {
+    const pool = await getConnection();
+    if (pool) {
+      const result = await pool.request().query('SELECT TOP 2 * FROM productos');
+      console.log('Conexión exitosa:', result.recordset);
+      
+    }else{
+      console.log('Conexión fallida.');
+    }
+  } catch (error) {
+    console.error('Error al ejecutar la prueba de conexión:', error);
+    console.error('Error details:', error.details);
+  }
 }
 
-
+module.exports = { pruebaConexion };
