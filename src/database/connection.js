@@ -1,5 +1,4 @@
 const sql = require('mssql');
-const { pruebaConexion } = require("../database/test.js");
 const config = require('../config.js');
 
 const dbsettings = {
@@ -23,6 +22,7 @@ async function getConnection() {
         console.log("conexion ok")
     } catch (error) {
         console.log(error);
+        console.log("..");
     }
 }
 

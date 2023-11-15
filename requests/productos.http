@@ -1,4 +1,4 @@
-@api = http://localhost:3000/productos
+@api = https://progressbackend-production.up.railway.app/productos
 GET {{api}}
 ###
 POST {{api}}

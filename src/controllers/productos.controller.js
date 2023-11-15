@@ -3,9 +3,14 @@ const { getConnection, sql, queries } = require("../database/index.js");
 const getProductos = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(queries.getAllProductos);
-        console.log(result);
-        res.json(result.recordset);
+        if (pool){
+            const result = await pool.request().query(queries.getAllProductos);
+            console.log(result);
+            res.json(result.recordset);
+    
+        }else{
+            console.log("conexion fallida")
+        }
     } catch (error) {
         res.status(500);
         res.send(error.message);
