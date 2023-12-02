@@ -29,7 +29,9 @@ function uploadFile(authClient, originalname) {
 
   const fileMetaData = {
     name: originalname,
-    parents: ["16vR9enaI1p_4apNu3TG8tAbE7cUlu4c4"]
+    // parents: ["16vR9enaI1p_4apNu3TG8tAbE7cUlu4c4"]
+    parents: ["1vrG5J7SHSiZVhK3MRVy_TEX-UXaTGx6H"]
+    
   };
 
   let mimeType;
