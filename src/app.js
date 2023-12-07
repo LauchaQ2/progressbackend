@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 // app.use(cors({ origin: 'http://127.0.0.1:5173' }));
 app.use(cors({ 
-    origin: ['http://127.0.0.1:5174','http://127.0.0.1:5173'] }));
+    origin: ['http://127.0.0.1:5174','http://127.0.0.1:5173', 'https://progresscrud.netlify.app'] }));
 
 // app.use(productsRoutes);
 // app.use(productosColoresRoutes);
